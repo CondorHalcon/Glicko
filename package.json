@@ -1,0 +1,19 @@
+{
+  "name": "com.condorhalcon.glicko",
+  "version": "0.1.0",
+  "displayName": "Glicko",
+  "description": "This is a C# glicko package",
+  "licensesUrl": "https://github.com/TaylorP/Glicko2/blob/master/LICENSE",
+  "keywords": [
+    "Glicko",
+    "Glicko-1",
+    "Glicko-2",
+    "CondorHalcon"
+  ],
+  "author": {
+    "name": "CondorHalcon",
+    "email": "judahhawi@condorhalcon.com",
+    "url": "https://www.condorhalcon.com"
+  },
+  "unity": "2018.4"
+}
