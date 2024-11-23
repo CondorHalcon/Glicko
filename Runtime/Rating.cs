@@ -27,6 +27,7 @@ namespace CondorHalcon.Glicko
         [SerializeField] internal double p;
         /// The rating volatility s (sigma)
         [SerializeField] internal double s;
+        internal double uDelta;
         /// The pending rating value, u'
         private double uPrime;
         /// The pending deviation value, u'
@@ -116,6 +117,7 @@ namespace CondorHalcon.Glicko
         // Assign the new pending values to the actual rating values
         public void Apply()
         {
+            uDelta = uPrime - u;
             u = uPrime;
             p = pPrime;
             s = sPrime;
@@ -128,6 +130,8 @@ namespace CondorHalcon.Glicko
 
         /// Returns the Glicko-1 deviation
         public double Deviation1 { get { return p * kScale; } }
+        /// <summary> Returns Glicko-1 rating delta. </summary>
+        public double Delta1 { get { return uDelta * kScale; } }
 
         /// Returns the Glicko-2 rating
         public double Rating2 { get { return u; } }
@@ -137,6 +141,8 @@ namespace CondorHalcon.Glicko
 
         /// Returns the Glicko-2 volatility
         public double Volatility2 { get { return s; } }
+        /// <summary> Returns Glicko-2 rating delta. </summary>
+        public double Delta2 { get { return uDelta; } }
         #endregion
 
         #region Private Methods

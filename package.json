@@ -15,8 +15,15 @@
     "email": "judahhawi@condorhalcon.com",
     "url": "https://www.condorhalcon.com"
   },
-  "unity": "2018.4",
+  "unity": "2021.3",
   "dependencies": {
     "com.unity.textmeshpro": "3.0.0"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Tic Tac Toe",
+      "description": "Tick Tac Toe game implementing Glicko",
+      "path": "Samples~/TicTacToe"
+    }
+  ]
 }
