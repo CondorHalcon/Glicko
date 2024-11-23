@@ -2,8 +2,14 @@ using NUnit.Framework;
 
 namespace CondorHalcon.Glicko.Tests
 {
+    /// <summary>
+    /// Unit tests for the Glicko rating system.
+    /// </summary>
     public class GlickoTests
     {
+        /// <summary>
+        /// Test the Glicko 1 rating system values.
+        /// </summary>
         [Test]
         public void Glicko1()
         {
@@ -27,6 +33,9 @@ namespace CondorHalcon.Glicko.Tests
             Assert.AreEqual(player.Deviation1, 151.52, .01);
         }
 
+        /// <summary>
+        /// Test the Glicko 2 rating system values.
+        /// </summary>
         [Test]
         public void Glicko2()
         {

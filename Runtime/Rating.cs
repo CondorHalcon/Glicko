@@ -3,49 +3,54 @@ using UnityEngine;
 
 namespace CondorHalcon.Glicko
 {
+    /// <summary>
+    /// Player rating class that contains the rating, deviation and volatility values.
+    /// </summary>
     [System.Serializable]
     public class Rating
     {
-        #region Glicko Constants
-        /// The default/initial rating value
-        const double kDefaultR = 1500.0;
-        /// The default/initial deviation value
-        const double kDefaultRD = 350.0;
-        /// The default/initial volatility value
-        const double kDefaultS = 0.06;
-        /// The Glicko-1 to Glicko-2 scale factor
-        const double kScale = 173.7178;
-        /// The system constant (tau)
-        const double kSystemConst = 0.5;
-        /// The convergence constant (epsilon)
-        const double kConvergence = 0.000001;
-        #endregion
-
-        /// The rating u (mu)
+        /// <summary> The rating u (mu) </summary>
         [SerializeField] internal double u;
-        /// The rating deviation p (phi)
+        /// <summary>  The rating deviation p (phi) </summary>
         [SerializeField] internal double p;
-        /// The rating volatility s (sigma)
+        /// <summary> The rating volatility s (sigma) </summary>
         [SerializeField] internal double s;
-        internal double uDelta;
-        /// The pending rating value, u'
+        /// <summary>
+        /// The rating delta value, since last update. </summary>
+        internal double delta;
+        /// <summary> The pending rating value, u' </summary>
         private double uPrime;
-        /// The pending deviation value, u'
+        /// <summary>
+        /// The pending deviation value, u' </summary>
         private double pPrime;
-        /// The pending volatility value, s'
+        /// <summary> The pending volatility value, s' </summary>
         private double sPrime;
 
         #region Constructor
-        public Rating(double rating = kDefaultR, double deviation = kDefaultRD,  double volatility = kDefaultS)
+        /// <summary>
+        /// Creates a new rating with the specified values.
+        /// </summary>
+        /// <param name="rating"></param>
+        /// <param name="deviation"></param>
+        /// <param name="volatility"></param>
+        /// <param name="ratingDelta"></param>
+        public Rating(double rating = Glicko.kDefaultR, double deviation = Glicko.kDefaultRD, double volatility = Glicko.kDefaultS, double ratingDelta = 0.0)
         {
-            u = (rating - kDefaultR) / kScale;
-            p = deviation / kScale;
+            u = (rating - Glicko.kDefaultR) / Glicko.kScale;
+            p = deviation / Glicko.kScale;
             s = volatility;
+            delta = ratingDelta / Glicko.kScale;
         }
 
         #endregion
 
         #region Changing Rating
+        /// <summary>
+        /// Updates the rating based on the specified matches.
+        /// </summary>
+        /// <param name="matches">Matches to calculate for.</param>
+        /// <see cref="Update(Match)"/>
+        /// <see cref="Apply"/>
         public void Update(Match[] matches)
         {
             double[] gTable = new double[matches.Length];
@@ -85,6 +90,12 @@ namespace CondorHalcon.Glicko
             pPrime = 1.0 / Math.Sqrt((1.0 / (p * p + sPrime * sPrime)) + invV);
             uPrime = u + pPrime * pPrime * dInner;
         }
+        /// <summary>
+        /// Updates the rating based on the specified match.
+        /// </summary>
+        /// <param name="match">Match to calculate for</param>
+        /// <see cref="Update(Match[])"/>
+        /// <see cref="Apply"/>
         public void Update(Match match)
         {
             // Compute the e and g function values
@@ -106,7 +117,10 @@ namespace CondorHalcon.Glicko
             uPrime = u + pPrime * pPrime * dInner;
         }
 
-        // Decay the deviation if no games were played
+        /// <summary>
+        /// Decays the rating deviation if no games were played.
+        /// </summary>
+        /// <see cref="Apply"/>
         public void Decay()
         {
             uPrime = u;
@@ -114,10 +128,15 @@ namespace CondorHalcon.Glicko
             sPrime = s;
         }
 
-        // Assign the new pending values to the actual rating values
+        /// <summary>
+        /// Applies the pending rating values to the actual rating values.
+        /// </summary>
+        /// <see cref="Update(Match[])"/>
+        /// <see cref="Update(Match)"/>
+        /// <see cref="Decay"/>
         public void Apply()
         {
-            uDelta = uPrime - u;
+            delta = uPrime - u;
             u = uPrime;
             p = pPrime;
             s = sPrime;
@@ -126,12 +145,12 @@ namespace CondorHalcon.Glicko
 
         #region Properties
         /// Returns the Glicko-1 rating
-        public double Rating1 { get { return (u * kScale) + kDefaultR; } }
+        public double Rating1 { get { return (u * Glicko.kScale) + Glicko.kDefaultR; } }
 
         /// Returns the Glicko-1 deviation
-        public double Deviation1 { get { return p * kScale; } }
+        public double Deviation1 { get { return p * Glicko.kScale; } }
         /// <summary> Returns Glicko-1 rating delta. </summary>
-        public double Delta1 { get { return uDelta * kScale; } }
+        public double Delta1 { get { return delta * Glicko.kScale; } }
 
         /// Returns the Glicko-2 rating
         public double Rating2 { get { return u; } }
@@ -142,27 +161,42 @@ namespace CondorHalcon.Glicko
         /// Returns the Glicko-2 volatility
         public double Volatility2 { get { return s; } }
         /// <summary> Returns Glicko-2 rating delta. </summary>
-        public double Delta2 { get { return uDelta; } }
+        public double Delta2 { get { return delta; } }
         #endregion
 
         #region Private Methods
+        /// <summary>
         /// Computes the value of the g function for a rating
+        /// </summary>
+        /// <returns></returns>
         double G()
         {
             double scale = p / Math.PI;
             return 1.0 / Math.Sqrt(1.0 + 3.0 * scale * scale);
         }
 
-        /// Computes the value of the e function in terms of a g function value
-        /// and another rating
+        /// <summary>
+        /// Computes the value of the e function in terms of a g function value and another rating 
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="rating"></param>
+        /// <returns></returns>        
         double E(double g, Rating rating)
         {
             double exponent = -1.0 * g * (rating.u - u);
             return 1.0 / (1.0 + Math.Exp(exponent));
         }
 
-        /// Computes the value of the f function in terms of x, delta^2, phi^2,
-        /// v, a and tau^2.
+        /// <summary>
+        /// Computes the value of the f function in terms of x, delta^2, phi^2,v, a and tau^2. 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="dS"></param>
+        /// <param name="pS"></param>
+        /// <param name="v"></param>
+        /// <param name="a"></param>
+        /// <param name="tS"></param>
+        /// <returns></returns>        
         static double F(double x, double dS, double pS, double v, double a, double tS)
         {
             double eX = Math.Exp(x);
@@ -172,13 +206,20 @@ namespace CondorHalcon.Glicko
             return (num/ (2.0 * den * den)) - ((x - a)/tS);
         }
 
+        /// <summary>
         /// Performs convergence iteration on the function f
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="v"></param>
+        /// <param name="p"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>        
         static double Convergence(double d, double v, double p, double s)
         {
             // Initialize function values for iteration procedure
             double dS = d * d;
             double pS = p * p;
-            double tS = kSystemConst * kSystemConst;
+            double tS = Glicko.kSystemConst * Glicko.kSystemConst;
             double a = Math.Log(s * s);
 
             // Select the upper and lower iteration ranges
@@ -192,17 +233,17 @@ namespace CondorHalcon.Glicko
             }
             else
             {
-                B = a - kSystemConst;
+                B = a - Glicko.kSystemConst;
                 while (F(B, dS, pS, v, a, tS) < 0.0)
                 {
-                    B -= kSystemConst;
+                    B -= Glicko.kSystemConst;
                 }
             }
 
             // Perform the iteration
             double fA = F(A, dS, pS, v, a, tS);
             double fB = F(B, dS, pS, v, a, tS);
-            while (Math.Abs(B - A) > kConvergence)
+            while (Math.Abs(B - A) > Glicko.kConvergence)
             {
                 double C = A + (A - B) * fA / (fB - fA);
                 double fC = F(C, dS, pS, v, a, tS);
@@ -225,20 +266,22 @@ namespace CondorHalcon.Glicko
         }
         #endregion
 
-        /// Returns the rating in Glicko-1 fromat
+        ///<summary>
+        /// String version of the rating in Glicko-1 format
+        /// </summary>
+        /// <returns>Glicko-1 rating</returns>
         public override string ToString()
         {
-            return ToString(true);
+            return $"[µ{Rating1}:φ{Deviation1}]";
         }
 
         /// <summary>
-        ///  Returns Glicko 1 or 2 rating
+        /// String version of the rating in Glicko-2 format
         /// </summary>
-        /// <param name="glicko1">Return glicko-1</param>
-        /// <returns>string</returns>
-        public string ToString(bool glicko1)
+        /// <returns>Glicko-2 rating</returns>
+        public string ToString2()
         {
-            return glicko1 ? $"[µ{Rating1}:φ{Deviation1}]" : $"[µ{Rating2}:φ{Deviation2}:σ{Volatility2}]";
+            return $"[µ{Rating2}:φ{Deviation2}:σ{Volatility2}]";
         }
     }
 }

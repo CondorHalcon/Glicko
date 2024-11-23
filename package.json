@@ -1,6 +1,6 @@
 {
   "name": "com.condorhalcon.glicko",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "displayName": "Glicko",
   "description": "This is a C# glicko package",
   "licensesUrl": "https://github.com/TaylorP/Glicko2/blob/master/LICENSE",
