@@ -1,6 +1,6 @@
 {
   "name": "com.condorhalcon.glicko",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "displayName": "Glicko",
   "description": "This is a C# glicko package",
   "licensesUrl": "https://github.com/TaylorP/Glicko2/blob/master/LICENSE",
@@ -15,5 +15,8 @@
     "email": "judahhawi@condorhalcon.com",
     "url": "https://www.condorhalcon.com"
   },
-  "unity": "2018.4"
+  "unity": "2018.4",
+  "dependencies": {
+    "com.unity.textmeshpro": "3.0.0"
+  }
 }
