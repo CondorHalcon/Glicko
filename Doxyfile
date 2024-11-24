@@ -910,7 +910,8 @@ WARN_LOGFILE           =
 
 INPUT                  = ./Runtime \
                          ./Samples~ \
-                         ./Tests
+                         ./Tests \
+                         ./Editor
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses

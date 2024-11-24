@@ -86,9 +86,18 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aea46a2451d775cf635dd1df6d7547b96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_condor_halcon_1_1_glicko_1_1_rating.html#aea46a2451d775cf635dd1df6d7547b96">Rating</a> (double rating=Glicko.kDefaultR, double deviation=Glicko.kDefaultRD, double volatility=Glicko.kDefaultS, double ratingDelta=0.0)</td></tr>
-<tr class="memdesc:aea46a2451d775cf635dd1df6d7547b96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new rating with the specified values.   <a href="class_condor_halcon_1_1_glicko_1_1_rating.html#aea46a2451d775cf635dd1df6d7547b96">More...</a><br /></td></tr>
-<tr class="separator:aea46a2451d775cf635dd1df6d7547b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1732fdf9815d37d11909a432061001ad"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_condor_halcon_1_1_glicko_1_1_rating.html#a1732fdf9815d37d11909a432061001ad">Rating</a> (double rating, double deviation, double volatility, double ratingDelta)</td></tr>
+<tr class="memdesc:a1732fdf9815d37d11909a432061001ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new rating with the specified rating, deviation, volatility and rating delta values.   <a href="class_condor_halcon_1_1_glicko_1_1_rating.html#a1732fdf9815d37d11909a432061001ad">More...</a><br /></td></tr>
+<tr class="separator:a1732fdf9815d37d11909a432061001ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac844d1640e9559f8c9e7a1955936b072"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_condor_halcon_1_1_glicko_1_1_rating.html#ac844d1640e9559f8c9e7a1955936b072">Rating</a> (double rating, double deviation, double volatility)</td></tr>
+<tr class="memdesc:ac844d1640e9559f8c9e7a1955936b072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new rating with the specified rating, deviation and volatility values.   <a href="class_condor_halcon_1_1_glicko_1_1_rating.html#ac844d1640e9559f8c9e7a1955936b072">More...</a><br /></td></tr>
+<tr class="separator:ac844d1640e9559f8c9e7a1955936b072"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a030dcb46bcb6a0e83e60e72e4b80c91a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_condor_halcon_1_1_glicko_1_1_rating.html#a030dcb46bcb6a0e83e60e72e4b80c91a">Rating</a> (double rating, double deviation)</td></tr>
+<tr class="memdesc:a030dcb46bcb6a0e83e60e72e4b80c91a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new rating with the specified rating and deviation values.   <a href="class_condor_halcon_1_1_glicko_1_1_rating.html#a030dcb46bcb6a0e83e60e72e4b80c91a">More...</a><br /></td></tr>
+<tr class="separator:a030dcb46bcb6a0e83e60e72e4b80c91a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a814aacf9a253f3fb70df55e84df888e2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_condor_halcon_1_1_glicko_1_1_rating.html#a814aacf9a253f3fb70df55e84df888e2">Rating</a> (double rating)</td></tr>
+<tr class="memdesc:a814aacf9a253f3fb70df55e84df888e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new rating with the specified rating value.   <a href="class_condor_halcon_1_1_glicko_1_1_rating.html#a814aacf9a253f3fb70df55e84df888e2">More...</a><br /></td></tr>
+<tr class="separator:a814aacf9a253f3fb70df55e84df888e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7736cf44d81e176c87096c1d2539eb87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_condor_halcon_1_1_glicko_1_1_rating.html#a7736cf44d81e176c87096c1d2539eb87">Update</a> (<a class="el" href="struct_condor_halcon_1_1_glicko_1_1_match.html">Match</a>[] matches)</td></tr>
 <tr class="memdesc:a7736cf44d81e176c87096c1d2539eb87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the rating based on the specified matches.   <a href="class_condor_halcon_1_1_glicko_1_1_rating.html#a7736cf44d81e176c87096c1d2539eb87">More...</a><br /></td></tr>
 <tr class="separator:a7736cf44d81e176c87096c1d2539eb87"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,8 +151,8 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>Delta2</b><code> [g
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Player rating class that contains the rating, deviation and volatility values.  </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aea46a2451d775cf635dd1df6d7547b96" name="aea46a2451d775cf635dd1df6d7547b96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea46a2451d775cf635dd1df6d7547b96">&#9670;&#160;</a></span>Rating()</h2>
+<a id="a1732fdf9815d37d11909a432061001ad" name="a1732fdf9815d37d11909a432061001ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1732fdf9815d37d11909a432061001ad">&#9670;&#160;</a></span>Rating() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -152,25 +161,25 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>Delta2</b><code> [g
           <td class="memname">CondorHalcon.Glicko.Rating.Rating </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>rating</em> = <code>Glicko.kDefaultR</code>, </td>
+          <td class="paramname"><em>rating</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>deviation</em> = <code>Glicko.kDefaultRD</code>, </td>
+          <td class="paramname"><em>deviation</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>volatility</em> = <code>Glicko.kDefaultS</code>, </td>
+          <td class="paramname"><em>volatility</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>ratingDelta</em> = <code>0.0</code>&#160;</td>
+          <td class="paramname"><em>ratingDelta</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -180,13 +189,120 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>Delta2</b><code> [g
       </table>
 </div><div class="memdoc">
 
-<p>Creates a new rating with the specified values.  </p>
+<p>Creates a new rating with the specified rating, deviation, volatility and rating delta values.  </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">rating</td><td></td></tr>
     <tr><td class="paramname">deviation</td><td></td></tr>
     <tr><td class="paramname">volatility</td><td></td></tr>
     <tr><td class="paramname">ratingDelta</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac844d1640e9559f8c9e7a1955936b072" name="ac844d1640e9559f8c9e7a1955936b072"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac844d1640e9559f8c9e7a1955936b072">&#9670;&#160;</a></span>Rating() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CondorHalcon.Glicko.Rating.Rating </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>rating</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>deviation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>volatility</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a new rating with the specified rating, deviation and volatility values.  </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rating</td><td></td></tr>
+    <tr><td class="paramname">deviation</td><td></td></tr>
+    <tr><td class="paramname">volatility</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a030dcb46bcb6a0e83e60e72e4b80c91a" name="a030dcb46bcb6a0e83e60e72e4b80c91a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a030dcb46bcb6a0e83e60e72e4b80c91a">&#9670;&#160;</a></span>Rating() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CondorHalcon.Glicko.Rating.Rating </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>rating</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>deviation</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a new rating with the specified rating and deviation values.  </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rating</td><td></td></tr>
+    <tr><td class="paramname">deviation</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a814aacf9a253f3fb70df55e84df888e2" name="a814aacf9a253f3fb70df55e84df888e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a814aacf9a253f3fb70df55e84df888e2">&#9670;&#160;</a></span>Rating() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CondorHalcon.Glicko.Rating.Rating </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>rating</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a new rating with the specified rating value.  </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rating</td><td></td></tr>
   </table>
   </dd>
 </dl>

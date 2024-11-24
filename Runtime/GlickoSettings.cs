@@ -7,6 +7,9 @@ using UnityEditor;
 
 namespace CondorHalcon.Glicko
 {
+    /// <summary>
+    /// The Glicko settings asset.
+    /// </summary>
     public class GlickoSettings : ScriptableObject
     {
         /// <summary> The path to the settings asset. </summary>

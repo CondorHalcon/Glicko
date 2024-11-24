@@ -6,6 +6,9 @@ using UnityEngine.UIElements;
 
 namespace CondorHalcon.Glicko.Editor
 {
+    /// <summary>
+    /// The Glicko settings editor provider.
+    /// </summary>
     internal class GlickoSettingsProvider : SettingsProvider
     {
         /// <summary> The serialized settings object. </summary>
@@ -34,7 +37,7 @@ namespace CondorHalcon.Glicko.Editor
             }
         }
         /// <summary>
-        /// Called when the settings provider is deactivated.
+        /// Called when the settings provider draws the GUI.
         /// </summary>
         /// <param name="searchContext"></param>
         public override void OnGUI(string searchContext)
