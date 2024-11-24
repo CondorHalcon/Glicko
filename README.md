@@ -2,22 +2,22 @@
 A Unity C# implementation of the Glicko-2 player rating system sourced from [@TaylorP](https://github.com/TaylorP) in his C++ implementation [TaylorP/Glicko2](https://github.com/TaylorP/Glicko2). Glicko and Glicko-2 are alternatives to traditional Elo rating systems. Glicko was developed by Mark Glickman; the theoretical details of the system is described on [Dr. Glickman's website](http://www.glicko.net/glicko.html). Both the original Glicko and Glicko-2 rating systems are in the public domain.
 
 # Usage
-The rating system has two components: the configuration and rating objects. The constants in `Glicko` described all of the configurable components; this includes the default rating values and system constants. Details of how to configure the rating system are described in the [Glicko-2 paper](http://www.glicko.net/glicko/glicko2.pdf).
+The rating system has two components: the configuration and rating objects. The values in `Glicko` described all of the configurable components and can be changed in the project settings in `Edit -> ProjectSettings/CondorHalcon/Glicko`; this includes the default rating values and system constants. Details of how to configure the rating system are described in the [Glicko-2 paper](http://www.glicko.net/glicko/glicko2.pdf).
 
 New ratings can be created as follows:
 
 ```csharp
-    // Create a new Rating instance with the default rating and rating deviation
-    Rating rating;
+    // Create a new Rating instance with the default rating
+    Rating rating = new Rating(Glicko.DefaultRating);
 
     // Create a new Rating instance with a specific rating
-    Rating r = new Rating(1500);
+    Rating rating = new Rating(1500);
 
     // Create a new Rating instance with a specific rating and deviation
-    Rating r = new Rating(1500, 200);
+    Rating rating = new Rating(1500, 200);
 
     // Create a new Rating instance with a specific rating, deviation and volatility
-    Rating r = new Rating(1500, 310, 0.04)
+    Rating rating = new Rating(1500, 310, 0.04)
 ```
 
 In the Glicko rating system, player ratings are updated in batches. As described in the [Glicko-2 paper](http://www.glicko.net/glicko/glicko2.pdf), the ideal number of games in a rating period is 10-15. As such, the primary method for updating a rating is the `Rating.Update()` method. This arguments to the `Rating.Update()` method are a game count, an array of opponent ratings and the outcome of the games. As per the Glicko-2 paper, a victor has the score `1.0`, a draw is scored as `0.5` and a loss is `0.0`.

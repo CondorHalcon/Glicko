@@ -1,22 +1,34 @@
-/// <summary>Glicko package namespace.</summary>
 namespace CondorHalcon.Glicko
 {
     /// <summary>
-    /// Glicko constants and scale factors.
+    /// Glicko settings (defaults, constants, and scale factors).
     /// </summary>
     public static class Glicko
     {
+        private static GlickoSettings settings;
+        public static GlickoSettings Settings
+        {
+            get
+            {
+                if (settings == null)
+                {
+                    settings = GlickoSettings.GetOrCreateSettings();
+                }
+                return settings;
+            }
+        }
+
         /// <summary> The default/initial rating value </summary>   
-        public const double kDefaultR = 1500.0;
+        public static double DefaultRating => Settings.kDefaultR;
         /// <summary> The default/initial deviation value </summary>
-        public const double kDefaultRD = 350.0;
+        public static double DefaultRatingDeviation => Settings.kDefaultRD;
         /// <summary> The default/initial volatility value </summary>
-        public const double kDefaultS = 0.06;
+        public static double DefaultVolatility => Settings.kDefaultS;
         /// <summary> The Glicko-1 to Glicko-2 scale factor </summary>
-        public const double kScale = 173.7178;
+        public static double Scale => Settings.kScale;
         /// <summary> The system constant (tau) </summary>
-        public const double kSystemConst = 0.5;
+        public static double SystemConst => Settings.kSystemConst;
         /// <summary> The convergence constant (epsilon) </summary>
-        public const double kConvergence = 0.000001;
+        public static double Convergence => Settings.kConvergence;
     }
 }

@@ -28,19 +28,37 @@ namespace CondorHalcon.Glicko
 
         #region Constructor
         /// <summary>
-        /// Creates a new rating with the specified values.
+        /// Creates a new rating with the specified rating, deviation, volatility and rating delta values.
         /// </summary>
         /// <param name="rating"></param>
         /// <param name="deviation"></param>
         /// <param name="volatility"></param>
         /// <param name="ratingDelta"></param>
-        public Rating(double rating = Glicko.kDefaultR, double deviation = Glicko.kDefaultRD, double volatility = Glicko.kDefaultS, double ratingDelta = 0.0)
+        public Rating(double rating, double deviation, double volatility, double ratingDelta)
         {
-            u = (rating - Glicko.kDefaultR) / Glicko.kScale;
-            p = deviation / Glicko.kScale;
+            u = (rating - Glicko.DefaultRating) / Glicko.Scale;
+            p = deviation / Glicko.Scale;
             s = volatility;
-            delta = ratingDelta / Glicko.kScale;
+            delta = ratingDelta / Glicko.Scale;
         }
+        /// <summary>
+        /// Creates a new rating with the specified rating, deviation and volatility values.
+        /// </summary>
+        /// <param name="rating"></param>
+        /// <param name="deviation"></param>
+        /// <param name="volatility"></param>
+        public Rating(double rating, double deviation, double volatility) : this(rating, deviation, volatility, 0.0) { }
+        /// <summary>
+        /// Creates a new rating with the specified rating and deviation values.
+        /// </summary>
+        /// <param name="rating"></param>
+        /// <param name="deviation"></param>
+        public Rating(double rating, double deviation) : this(rating, deviation, Glicko.DefaultVolatility, 0.0) { }
+        /// <summary>
+        /// Creates a new rating with the specified rating value.
+        /// </summary>
+        /// <param name="rating"></param>
+        public Rating(double rating) : this(rating, Glicko.DefaultRatingDeviation, Glicko.DefaultVolatility, 0.0) { }
 
         #endregion
 
@@ -145,12 +163,12 @@ namespace CondorHalcon.Glicko
 
         #region Properties
         /// Returns the Glicko-1 rating
-        public double Rating1 { get { return (u * Glicko.kScale) + Glicko.kDefaultR; } }
+        public double Rating1 { get { return (u * Glicko.Scale) + Glicko.DefaultRating; } }
 
         /// Returns the Glicko-1 deviation
-        public double Deviation1 { get { return p * Glicko.kScale; } }
+        public double Deviation1 { get { return p * Glicko.Scale; } }
         /// <summary> Returns Glicko-1 rating delta. </summary>
-        public double Delta1 { get { return delta * Glicko.kScale; } }
+        public double Delta1 { get { return delta * Glicko.Scale; } }
 
         /// Returns the Glicko-2 rating
         public double Rating2 { get { return u; } }
@@ -219,7 +237,7 @@ namespace CondorHalcon.Glicko
             // Initialize function values for iteration procedure
             double dS = d * d;
             double pS = p * p;
-            double tS = Glicko.kSystemConst * Glicko.kSystemConst;
+            double tS = Glicko.SystemConst * Glicko.SystemConst;
             double a = Math.Log(s * s);
 
             // Select the upper and lower iteration ranges
@@ -233,17 +251,17 @@ namespace CondorHalcon.Glicko
             }
             else
             {
-                B = a - Glicko.kSystemConst;
+                B = a - Glicko.SystemConst;
                 while (F(B, dS, pS, v, a, tS) < 0.0)
                 {
-                    B -= Glicko.kSystemConst;
+                    B -= Glicko.SystemConst;
                 }
             }
 
             // Perform the iteration
             double fA = F(A, dS, pS, v, a, tS);
             double fB = F(B, dS, pS, v, a, tS);
-            while (Math.Abs(B - A) > Glicko.kConvergence)
+            while (Math.Abs(B - A) > Glicko.Convergence)
             {
                 double C = A + (A - B) * fA / (fB - fA);
                 double fC = F(C, dS, pS, v, a, tS);
